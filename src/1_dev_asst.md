@@ -16,6 +16,7 @@ FE | 前端
 - [Svelte](https://svelte.dev/): 前端框架
 - [Lit](https://lit.dev/): Google 的前端框架
 - [nextjs](https://nextjs.org/): React 开发框架
+- [tailwindcss](https://tailwindcss.com/): 日益流行的 CSS 框架
 
 
 Cross-platform App Development Frameworks | 跨平台 APP 开发框架

@@ -7,6 +7,10 @@ Windows 镜像下载
 - [next.itellyou.cn](https://next.itellyou.cn/)
 - [www.xitongku.com](https://www.xitongku.com/)
 
+Windows
+- [Unigetui](https://www.marticliment.com/unigetui/): winget的图形化工具
+- [FileCentipede](https://github.com/filecxx/FileCentipede): FileCentipede 下载工具
+
 
 Images tools | 镜像工具
 - [ventoy](https://www.ventoy.net): U 盘镜像工具，支持 Windows/Linux 等多种镜像
@@ -25,3 +29,7 @@ Others | 其他
 - [gather.town](https://app.gather.town/app)
 - [Arch Linux 简明指南](https://arch.icekylin.online/)
 - [Arch Linux 安装使用教程](https://archlinuxstudio.github.io/ArchLinuxTutorial)
+
+PDF
+- [Sumatra PDF](https://www.sumatrapdfreader.org/free-pdf-reader): PDF 阅读器
+- [mupdf](https://www.mupdf.com/): PDF阅读器

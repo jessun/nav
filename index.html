@@ -2,12 +2,17 @@
 <html lang="zh-CN">
 
 <head>
+    <base target="_blank">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navigation</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧭</text></svg>">
+
+    <script src="data.js"></script>
+
     <style>
         :root {
-            /* Nord Theme Palette */
             --nord0: #2e3440;
             --nord1: #3b4252;
             --nord2: #434c5e;
@@ -31,58 +36,109 @@
             margin: 0 auto;
         }
 
-        h1 {
-            color: var(--nord6);
+        /* --- 头部样式修改 --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            /* 标题在左，图标在右 */
+            align-items: flex-end;
+            /* 底部对齐 */
             border-bottom: 2px solid var(--nord3);
             padding-bottom: 15px;
             margin-bottom: 30px;
+        }
+
+        h1 {
+            color: var(--nord6);
+            margin: 0;
+            /* 去掉默认边距 */
             font-size: 24px;
             font-weight: 300;
             letter-spacing: 1px;
         }
 
-        /* --- 核心修改：瀑布流布局 (Masonry via CSS Columns) --- */
-        .container {
-            /* 设置列数：默认 3 列 */
-            column-count: 3;
-            /* 列与列之间的间距 */
-            column-gap: 25px;
+        .header-links {
+            display: flex;
+            gap: 15px;
         }
 
-        /* 响应式：屏幕变窄时减少列数 */
+        .icon-link {
+            display: flex;
+            align-items: center;
+            color: var(--nord4);
+            transition: color 0.2s, transform 0.2s;
+        }
+
+        .icon-link svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+            /* 图标颜色跟随文字 */
+        }
+
+        .icon-link:hover {
+            color: var(--nord8);
+            /* 悬停变冰蓝色 */
+            transform: translateY(-2px);
+            /* 微微上浮 */
+        }
+
+        /* --- 容器布局 --- */
+        .container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 25px;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            flex: 1;
+            min-width: 0;
+        }
+
         @media (max-width: 1100px) {
             .container {
-                column-count: 2;
+                flex-wrap: wrap;
             }
         }
 
-        @media (max-width: 700px) {
+        @media (max-width: 900px) {
+            body {
+                padding: 15px;
+            }
+
             .container {
-                column-count: 1;
+                flex-direction: column;
+            }
+
+            .column {
+                width: 100%;
             }
         }
 
-        /* 卡片样式 */
+        /* --- 卡片样式 (保持阴影+发光) --- */
         .category-box {
             background-color: var(--nord1);
             padding: 20px 25px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s ease;
-
-            /* --- 核心修改：防止卡片断裂 --- */
-            /* 必须设置为 inline-block 或 block，配合 break-inside */
-            display: inline-block;
-            width: 100%;
-            /* 保证 padding 和 border 算在宽度内 */
-            box-sizing: border-box;
-            /* 防止内容被分割到两列 */
-            break-inside: avoid;
-            /* 瀑布流中，卡片底部的间距 */
-            margin-bottom: 25px;
+            border: 1px solid transparent;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        /* 标题样式保持不变 */
+        .category-box:hover {
+            background-color: var(--nord2);
+            border-color: rgba(136, 192, 208, 0.5);
+            box-shadow:
+                0 15px 30px rgba(0, 0, 0, 0.3),
+                0 0 15px rgba(136, 192, 208, 0.3);
+            transform: translateY(-2px);
+        }
+
         .main-category-title {
             color: var(--nord6);
             font-size: 18px;
@@ -134,280 +190,58 @@
 </head>
 
 <body>
-
-    <h1>Navigation</h1>
-
-    <div class="container">
-
-        <div class="category-box">
-            <div class="main-category-title">Coding study | 编程学习</div>
-
-            <div class="sub-category-title">Rust</div>
-            <div class="link-item"><a href="https://doc.rust-lang.org/nightly/">Rust 官方文档</a></div>
-            <div class="link-item"><a href="https://rustwiki.org/">Rustwiki</a></div>
-            <div class="link-item"><a href="https://course.rs">Rust 圣经</a></div>
-            <div class="link-item"><a href="https://github.com/sunface/rust-by-practice">Rust by practice</a></div>
-            <div class="link-item"><a href="https://weihanglo.tw/rust-algorithm-club/">Rust 算法俱乐部</a></div>
-            <div class="link-item"><a href="https://huangjj27.github.io/async-book/">Rust 异步编程</a></div>
-            <div class="link-item"><a href="https://tourofrust.com/">Rust 语言之旅</a></div>
-
-            <div class="sub-category-title">Golang</div>
-            <div class="link-item"><a href="https://hao.studygolang.com/">Golang 网站导航</a></div>
-            <div class="link-item"><a href="https://draven.co/golang/">Go 语言设计与实现</a></div>
-            <div class="link-item"><a href="https://www.kancloud.cn/mutouzhang/go/596804">Go 并发编程</a></div>
-
-            <div class="sub-category-title">TS & JS & Nodejs</div>
-            <div class="link-item"><a href="https://doc.cherrychat.org/ts/">TypeScript 3.1 平滑文档</a></div>
-            <div class="link-item"><a href="https://doc.cherrychat.org/node/">Node v21.7.1 平滑文档</a></div>
-            <div class="link-item"><a href="https://zh.javascript.info">现代 JavaScript 教程</a></div>
-
-            <div class="sub-category-title">FE | 前端</div>
-            <div class="link-item"><a href="https://svelte.dev/">Svelte</a><span class="desc">：前端框架</span></div>
-            <div class="link-item"><a href="https://lit.dev/">Lit</a><span class="desc">：Google 的前端框架</span></div>
-            <div class="link-item"><a href="https://nextjs.org/">Nextjs</a><span class="desc">：React 开发框架</span></div>
-            <div class="link-item"><a href="https://tailwindcss.com/">Tailwindcss</a><span class="desc">：日益流行的 CSS
-                    框架</span></div>
-
-            <div class="sub-category-title">Cross-platform | 跨平台框架</div>
-            <div class="link-item"><a href="https://flutter.dev/">Flutter</a><span class="desc">：Google
-                    推出的移动应用开发框架</span></div>
-            <div class="link-item"><a href="https://tauri.app/">Tauri</a><span class="desc">：后端基于 Rust 的跨平台框架</span>
-            </div>
-            <div class="link-item"><a href="https://github.com/zed-industries/zed/tree/main/crates/gpui">gpui</a><span
-                    class="desc">：Zed 编辑器采用的 gui 技术方案</span></div>
-            <div class="link-item"><a href="https://github.com/longbridge/gpui-component">gpui-component</a><span
-                    class="desc">：longbridge 开源的 gpui 组件</span></div>
-
-            <div class="sub-category-title">Editor | 编辑器</div>
-            <div class="link-item"><a href="https://book.emacs-china.org">21 天学会 Emacs（2022 Edition）</a></div>
-            <div class="link-item"><a href="https://www.emacswiki.org/emacs">EmacsWiki</a></div>
-            <div class="link-item"><a href="https://www.vimgolf.com">vimgolf</a></div>
-            <div class="link-item"><a href="https://yianwillis.github.io/vimcdoc/doc/options.html">Vim options 手册</a>
-            </div>
-            <div class="sub-category-title">devdocs | 开发文档</div>
-            <div class="link-item"><a href="https://devdocs.io">devdocs.io</a></div>
-            <div class="link-item"><a href="https://devhints.io/">devhints.io</a></div>
-            <div class="link-item"><a href="https://docs.rs/">docs.rs</a></div>
-            <div class="link-item"><a href="https://lib.rs/">lib.rs</a></div>
-            <div class="sub-category-title">学习网站</div>
-            <div class="link-item"><a href="https://www.imooc.com/">慕课网</a></div>
-            <div class="link-item"><a href="https://time.geekbang.org/">极客时间</a></div>
-            <div class="link-item"><a
-                    href="https://wizardforcel.gitbooks.io/the-art-of-programming-by-july/content/index.html">《编程之法：面试和算法心得》</a>
-            </div>
-            <div class="sub-category-title">技术社区</div>
-            <div class="link-item"><a href="https://rustcc.cn">rustcc.cn</a></div>
+    <header>
+        <h1>Navigation</h1>
+        <div class="header-links">
+            <a href="https://github.com/jessun" class="icon-link" title="GitHub">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405 1.02 0 2.04.135 3 .405 2.28-1.56 3.285-1.23 3.285-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.285 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                </svg>
+            </a>
+            <a href="mailto:jessun.pro@gmail.com" class="icon-link" title="Email">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                </svg>
+            </a>
         </div>
+    </header>
 
-        <div class="category-box">
-            <div class="main-category-title">System tools | 系统工具</div>
+    <div id="app" class="container"></div>
 
-            <div class="sub-category-title">Win / Linux / Mac</div>
-            <div class="link-item"><a href="https://www.snipaste.com">Snipaste</a><span class="desc">：多平台的截图工具</span>
-            </div>
-            <div class="link-item"><a href="https://pixpin.cn">Pixpin</a><span class="desc">：Win/MacOS 下截图、贴图工具</span>
-            </div>
-
-            <div class="sub-category-title">Windows</div>
-            <div class="link-item"><a href="https://www.marticliment.com/unigetui/">unigetui</a><span
-                    class="desc">：winget 的图形化工具</span></div>
-            <div class="sub-category-title">MacOS</div>
-            <div class="link-item"><a href="https://github.com/exelban/stats">stats</a><span class="desc">：MacOS
-                    的菜单栏工具</span></div>
-            <div class="link-item"><a href="https://github.com/waydabber/BetterDisplay">BetterDisplay</a></div>
-            <div class="link-item"><a href="https://apps.apple.com/cn/app/ishot-pro/id1611347086?mt=12">iShot
-                    Pro</a><span class="desc">：MacOS 下的截图和录屏工具</span></div>
-            <div class="link-item"><a href="https://www.raycast.com/">Raycast</a><span class="desc">：快捷启动器</span></div>
-            <div class="link-item"><a href="https://alt-tab-MacOS.netlify.app/">AltTab</a><span class="desc">：MacOS
-                    下的窗口切换工具</span></div>
-
-            <div class="sub-category-title">Images tools</div>
-            <div class="link-item"><a href="https://www.ventoy.net">Ventoy</a><span class="desc">：U 盘镜像工具</span></div>
-        </div>
-
-        <div class="category-box">
-            <div class="main-category-title">Net tools | 网络工具</div>
-
-            <div class="sub-category-title">Download | 下载</div>
-            <div class="link-item"><a href="https://www.freedownloadmanager.org/zh/">FDM</a><span
-                    class="desc">：多平台的下载工具</span></div>
-            <div class="link-item"><a href="https://www.xdown.org/">Xdown</a><span class="desc">：支持 BT/HTTP/FTP</span>
-            </div>
-            <div class="link-item"><a href="https://motrix.app/">Motrix</a><span class="desc">：基于 Aria2 的下载工具</span>
-            </div>
-            <div class="link-item"><a href="https://github.com/filecxx/FileCentipede">filecxx</a><span
-                    class="desc">：下载工具 (Win/Lin)</span></div>
-
-            <div class="sub-category-title">File share | 文件共享</div>
-            <div class="link-item"><a href="https://blip.net">Blip</a><span class="desc">：类似 airdrop 的跨平台工具</span></div>
-            <div class="link-item"><a href="https://localsend.org/">LocalSend</a><span class="desc">：PC/平板/手机文件发送</span>
-            </div>
-
-            <div class="sub-category-title">Proxy & VPN</div>
-            <div class="link-item"><a href="https://白嫖机场.com">白嫖机场</a></div>
-            <div class="link-item"><a href="https://三毛导航.com">三毛机场</a></div>
-            <div class="link-item"><a href="https://guatizi.com">挂梯子</a></div>
-            <div class="link-item"><a href="https://github.com/jichangtuijian-cheap/cheap-airports">低价机场推荐</a></div>
-
-            <div class="sub-category-title">Website tools | 网站工具</div>
-            <div class="link-item"><a href="https://cn.sli.dev">Slidev</a></div>
-            <div class="link-item"><a href="https://editor.mdnice.com">editor.mdnice.com</a></div>
-            <div class="link-item"><a href="https://www.67tool.com/">即时工具</a></div>
-            <div class="link-item"><a href="https://www.dute.org/">独特工具箱</a></div>
-            <div class="link-item"><a href="https://pixso.cn">Pixso</a><span class="desc">：产品原型设计</span></div>
-            <div class="link-item"><a href="https://boardmix.cn">boardmix</a><span class="desc">：白板工具</span></div>
-            <div class="link-item"><a href="https://transform.tools">transform.tools</a><span
-                    class="desc">：数据格式变换工具</span></div>
-            <div class="link-item"><a href="https://gcopy.rutron.net/zh">Gcopy</a><span class="desc">：剪贴板同步和文件共享</span>
-            </div>
-        </div>
-
-        <div class="category-box">
-            <div class="main-category-title">Reader & Rss | 阅读订阅</div>
-
-            <div class="sub-category-title">Reader | 阅读</div>
-            <div class="link-item"><a href="https://johnfactotum.github.io/foliate/">Foliate</a><span
-                    class="desc">：Linux PDF 阅读器</span></div>
-            <div class="link-item"><a href="https://github.com/koodo-reader/koodo-reader">koodo-reader</a><span
-                    class="desc">：跨平台电子书阅读器</span></div>
-            <div class="link-item"><a href="https://www.sumatrapdfreader.org/free-pdf-reader">Sumatra PDF</a><span
-                    class="desc">：Windows PDF 阅读器</span></div>
-            <div class="link-item"><a href="https://www.mupdf.com/">MuPDF</a><span class="desc">：Windows PDF
-                    阅读器</span>
-            </div>
-
-            <div class="sub-category-title">Rss</div>
-            <div class="link-item"><a href="https://www.inoreader.com">inoreader</a><span class="desc">：综合类 Rss
-                    订阅网站</span></div>
-            <div class="link-item"><a href="https://feedx.net">feedx</a><span class="desc">：订阅源</span></div>
-            <div class="link-item"><a href="https://newreleases.io/">newreleases</a><span class="desc">：各种服务的更新通知</span>
-            </div>
-        </div>
-
-        <div class="category-box">
-            <div class="main-category-title">Dev Assistance | 开发辅助</div>
-
-            <div class="sub-category-title">命令行工具</div>
-            <div class="link-item"><a href="https://cli.github.com/manual">github-cli</a><span class="desc">：github
-                    命令行客户端</span></div>
-            <div class="link-item"><a href="https://github.com/extrawurst/gitui">gitui</a><span class="desc">：使用
-                    rust
-                    语言开发的 git ui 工具</span></div>
-            <div class="link-item"><a
-                    href="https://gist.github.com/sts10/daadbc2f403bdffad1b6d33aff016c0a">rust-command-line-utilities</a><span
-                    class="desc">：Rust 实现的各种命令行工具</span></div>
-            <div class="link-item"><a href="https://www.chezmoi.io">chezmoi</a><span class="desc">：Dotfiles
-                    文件管理工具</span></div>
-
-            <div class="sub-category-title">MacOS</div>
-            <div class="link-item"><a href="https://github.com/XcodesOrg/XcodesApp">XcodesApp</a><span
-                    class="desc">：Xcodes版本下载工具</span></div>
-
-
-            <div class="sub-category-title">Inspect & API | 诊断和API</div>
-            <div class="link-item"><a href="https://apifox.com/">Apifox</a><span class="desc">：类似 postman 的 api
-                    工具</span></div>
-            <div class="link-item"><a href="https://reqable.com">Reqable</a><span class="desc">：类似 postman 的 api
-                    工具</span></div>
-            <div class="link-item"><a href="https://scalar.com">Scalar</a><span class="desc">：类似 postman 的 api
-                    工具</span>
-            </div>
-            <div class="link-item"><a href="https://www.usebruno.com/">Usebruno</a><span class="desc">：类似 postman，支持
-                    git
-                    管理</span></div>
-
-            <div class="sub-category-title">IP utils | IP 工具</div>
-            <div class="link-item"><a href="https://ping0.cc">ping0cc</a><span class="desc">：检查 IP 纯净度</span></div>
-            <div class="link-item"><a href="https://whoer.net">whoer</a></div>
-            <div class="link-item"><a href="http://ip111.cn">ip111</a><span class="desc">：检查 IP 地址</span></div>
-            <div class="link-item"><a href="https://zerossl.com">zerossl</a><span class="desc">：免费 SSL
-                    证书申请与使用</span>
-            </div>
-            <div class="sub-category-title">Docker</div>
-            <div class="link-item"><a href="https://yeasy.gitbook.io/docker_practice">Docker 从入门到实践</a></div>
-        </div>
-
-
-        <div class="category-box">
-            <div class="main-category-title">Resources | 资源</div>
-            <div class="sub-category-title">网站资讯</div>
-            <div class="link-item"><a href="https://www.hellowindows.cn/">显卡天梯榜</a></div>
-
-            <div class="sub-category-title">Windows 镜像</div>
-            <div class="link-item"><a href="https://www.hellowindows.cn/">HelloWindows</a></div>
-            <div class="link-item"><a href="https://msdn.sjjzm.com/">MSDN sjjzm</a></div>
-            <div class="link-item"><a href="https://files.rg-adguard.net">RG-Adguard</a></div>
-            <div class="link-item"><a href="https://next.itellyou.cn/">Next I Tell You</a></div>
-            <div class="link-item"><a href="https://www.xitongku.com/">系统库</a></div>
-
-            <div class="sub-category-title">Art/Wallpaper</div>
-            <div class="link-item"><a href="https://wallhaven.cc/">wallhaven</a><span class="desc">：壁纸</span></div>
-            <div class="link-item"><a href="https://www.deviantart.com/">deviantart</a><span class="desc">：壁纸</span>
-            </div>
-
-            <div class="sub-category-title">Reading</div>
-            <div class="link-item"><a href="http://zlib.re">Z-library</a></div>
-
-            <div class="sub-category-title">Games</div>
-            <div class="link-item"><a href="https://gkinto.com/">gamekegs游戏大桶</a></div>
-            <div class="link-item"><a href="https://www.2023game.com">游戏星辰</a></div>
-            <div class="link-item"><a href="https://www.flysheep6.com">www.flysheep6.com</a></div>
-            <div class="link-item"><a href="https://youxiji.org">youxiji.org</a></div>
-
-            <div class="sub-category-title">Apps</div>
-            <div class="link-item"><a href="https://www.zhiniw.com">知您网</a><span class="desc">：MacOS app 下载</span>
-            </div>
-            <div class="link-item"><a href="https://www.coodoor.com">谷多</a><span class="desc">：MacOS app 下载</span>
-            </div>
-            <div class="link-item"><a href="https://lemon.qq.com/lab/">腾讯柠檬精选APP</a></div>
-            <div class="link-item"><a href="https://www.digit77.com/">www.digit77.com</a></div>
-            <div class="link-item"><a href="https://www.isofts.org">www.isofts.org</a></div>
-            <div class="link-item"><a href="https://www.macwk.com">macwk</a></div>
-
-            <div class="sub-category-title">导航网</div>
-            <div class="link-item"><a href="https://www.hifast.cn">快导航网</a></div>
-            <div class="sub-category-title">在线漫画</div>
-            <div class="link-item"><a href="https://www.manhuaren.com/manhua-list/">漫画大全</a></div>
-            <div class="sub-category-title">在线影视</div>
-            <div class="link-item"><a href="https://cupfox.app/">茶杯狐</a></div>
-            <div class="link-item"><a href="https://www.ncat.app">网飞猫</a></div>
-            <div class="link-item"><a href="https://www.keke1.app">可可影视</a></div>
-            <div class="link-item"><a href="https://www.ppnix.com/cn/">ppnix</a></div>
-            <div class="link-item"><a href="https://v.ikanbot.com/">爱看机器人</a></div>
-            <div class="link-item"><a href="https://yanetflix.com">奈飞工厂</a></div>
-            <div class="link-item"><a href="https://gimytv.ai">https://gimytv.ai</a></div>
-            <div class="link-item"><a href="https://auete.com">Auete影视</a></div>
-            <div class="link-item"><a href="https://renren.pro">人人影视 renren.pro</a></div>
-            <div class="sub-category-title">种子搜索</div>
-            <div class="link-item"><a href="https://bt4gprx.com">https://bt4gprx.com</a></div>
-            <div class="sub-category-title">影视下载</div>
-            <div class="link-item"><a href="https://www.yinfans.net">音范丝</a></div>
-            <div class="link-item"><a href="https://www.6vdyy.com">6v电影网</a></div>
-            <div class="link-item"><a href="http://www.btdx8.net/">比特大雄</a></div>
-            <div class="sub-category-title">Telegram</div>
-            <div class="link-item"><a href="https://telegramchannels.me/zh">电报频道</a></div>
-            <div class="link-item"><a href="https://tgnav.com">玩转电报</a></div>
-
-            <div class="sub-category-title">Others</div>
-            <div class="link-item"><a href="http://rpm.pbone.net/">RPM Pbone</a><span class="desc">：RPM
-                    包搜索和下载</span></div>
-            <div class="link-item"><a href="https://pkgs.org">pkgs for linux and unix</a></div>
-
-        </div>
-        <div class="category-box">
-            <div class="main-category-title">Database tools | 数据库工具</div>
-            <div class="sub-category-title">数据库工具</div>
-            <div class="link-item"><a href="https://tableplus.com/">TablePlus</a><span class="desc">数据库管理工具</span>
-            </div>
-            <div class="link-item"><a href="https://sql.studio">SQL Studio</a><span class="desc">数据库管理工具</span>
-            </div>
-            <div class="link-item"><a href="https://github.com/commandprompt/pgmanage">PgManage</a><span
-                    class="desc">数据库管理工具</span></div>
-            <div class="link-item"><a href="https://www.beekeeperstudio.io">Beekeeper Studio</a></div>
-            <div class="link-item"><a href="https://dbeaver.io">dbeaver</a></div>
-            <div class="link-item"><a href="https://www.dbgate.io/zh/">dbgate</a></div>
-        </div>
-    </div>
+    <script>
+        const app = document.getElementById('app');
+        navData.forEach(columnData => {
+            const columnDiv = document.createElement('div');
+            columnDiv.className = 'column';
+            columnData.forEach(cat => {
+                const box = document.createElement('div');
+                box.className = 'category-box';
+                const title = document.createElement('div');
+                title.className = 'main-category-title';
+                title.textContent = cat.title;
+                box.appendChild(title);
+                cat.items.forEach(item => {
+                    if (item.subtitle) {
+                        const sub = document.createElement('div');
+                        sub.className = 'sub-category-title';
+                        sub.textContent = item.subtitle;
+                        box.appendChild(sub);
+                    } else {
+                        const linkDiv = document.createElement('div');
+                        linkDiv.className = 'link-item';
+                        let html = `<a href="${item.url}">${item.name}</a>`;
+                        if (item.desc) {html += `<span class="desc">：${item.desc}</span>`;}
+                        linkDiv.innerHTML = html;
+                        box.appendChild(linkDiv);
+                    }
+                });
+                columnDiv.appendChild(box);
+            });
+            app.appendChild(columnDiv);
+        });
+    </script>
 </body>
 
 </html>

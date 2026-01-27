@@ -10,6 +10,8 @@ const navData = [
                 { name: "Rust 官方文档", url: "https://doc.rust-lang.org/nightly/" },
                 { name: "Rust Wiki", url: "https://rustwiki.org/" },
                 { name: "Rust 圣经", url: "https://course.rs" },
+                { name: "Rust 秘典（死灵书）", url: "https://nomicon.purewhite.io/" },
+
                 { name: "Rust by practice", url: "https://github.com/sunface/rust-by-practice" },
                 { name: "Rust 算法俱乐部", url: "https://weihanglo.tw/rust-algorithm-club/" },
                 { name: "Rust 异步编程", url: "https://huangjj27.github.io/async-book/" },

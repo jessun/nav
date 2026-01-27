@@ -126,6 +126,10 @@ const navData = [
                 { name: "Beekeeper Studio", url: "https://www.beekeeperstudio.io" },
                 { name: "dbeaver", url: "https://dbeaver.io" },
                 { name: "dbgate", url: "https://www.dbgate.io/zh/" }
+                
+                { subtitle: "website tools | 网站工具" },
+                { name: "jsonplaceholder.typicode.com", url: "https://jsonplaceholder.typicode.com/", desc: "一个免费的在线 REST API 服务，它专门为开发者提供伪造数据（Fake Data）" },
+                { name: "httpbin.org", url: "https://httpbin.org/ ", desc: "用来调试 HTTP 客户端" },
             ]
         },
         {

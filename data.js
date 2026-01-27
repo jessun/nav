@@ -125,11 +125,12 @@ const navData = [
                 { name: "PgManage", url: "https://github.com/commandprompt/pgmanage", desc: "数据库管理工具" },
                 { name: "Beekeeper Studio", url: "https://www.beekeeperstudio.io" },
                 { name: "dbeaver", url: "https://dbeaver.io" },
-                { name: "dbgate", url: "https://www.dbgate.io/zh/" }
+                { name: "dbgate", url: "https://www.dbgate.io/zh/" },
                 
                 { subtitle: "website tools | 网站工具" },
                 { name: "jsonplaceholder.typicode.com", url: "https://jsonplaceholder.typicode.com/", desc: "一个免费的在线 REST API 服务，它专门为开发者提供伪造数据（Fake Data）" },
                 { name: "httpbin.org", url: "https://httpbin.org/ ", desc: "用来调试 HTTP 客户端" },
+                { name: "Google 管理员工具箱", url: "https://toolbox.googleapps.com/apps/main/", desc: "" },
             ]
         },
         {
